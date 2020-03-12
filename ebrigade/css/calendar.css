@@ -1,0 +1,31 @@
+/* Used in the calendar only, completes fullcalendar */
+body {
+    margin: 40px 10px;
+    padding: 0;
+    font-family: Tahoma, Geneva, sans-serif;
+    font-size: 14px;
+}
+
+#calendar {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.fc-sat,.fc-sun {
+    background: #ffffcc;
+}
+
+.fc-day-header, .fc-day-header > a, .fc-day-header > a:hover, .fc-day-header > a:focus {
+    background-color: #191970;
+    text-decoration:none;
+    color: white;
+    opacity: 1;
+}
+
+.fc-button {
+    background:none;
+    border: solid #191970 1px;
+    text-decoration:none;
+    color: #191970;
+}
+

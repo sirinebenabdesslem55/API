@@ -43,11 +43,11 @@ class Utilisateur
     static public function getEmploye($data)
     {
 
-        $id =$data['P_ID'];
+        //$id =$data['P_ID'];
         try {
-            $query='SELECT `P_ID`,`P_PRENOM`,`P_PRENOM2`,`P_NOM`,`P_GRADE`,`P_STATUT`,`P_EMAIL`,`P_SEXE`,`P_PROFESSION` FROM pompier WHERE P_ID=:P_ID';
+            $query='SELECT *  FROM pompier WHERE P_ID="'.$data.'"';
             $stmt= DB::connect()->prepare($query);
-            $stmt->bindParam(':P_ID',$id);
+            //$stmt->bindParam(':P_ID',$id);
             $stmt->execute();
             $employe = $stmt->fetch(PDO::FETCH_ASSOC);
             return $employe;
@@ -56,6 +56,25 @@ class Utilisateur
         }
 
     }
+
+    static public function getEmployeLogin($data)
+    {
+        try {
+            $query='SELECT P_MDP, P_ID, P_EMAIL, P_NOM, P_PRENOM FROM pompier WHERE P_CODE="'.$data.'"';
+            $stmt= DB::connect()->prepare($query);
+            //$stmt->bindParam(':P_ID',$id);
+            $stmt->execute();
+            $employe = $stmt->fetch(PDO::FETCH_ASSOC);
+            //var_dump(print_r($employe));
+            return $employe;
+            
+        } catch (PDOException $ex) {
+            echo'erer' . $ex->getMessage();
+        }
+
+    }
+
+    
 
     static public function up($data)
     {
@@ -96,8 +115,8 @@ $query='UPDATE `pompier` SET  `P_NOM`=:P_NOM,
         $stmt->close;
         $stmt = null;
 
-    }
-
-    
+    }  
 }
-
+//$test = Utilisateur::getEmployeLogin('admin');
+//var_dump($test);
+?>

@@ -1,0 +1,31 @@
+.noprint
+{
+  display: none;
+}
+
+A { 
+  text-decoration: none !important;
+}
+
+BODY {
+  padding:15px;
+  font-size:13px !important;
+}
+
+
+INPUT, TEXTAREA {
+  border:0px !important;
+}
+
+TD {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size:13px !important;
+}
+
+SELECT {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 2px 30px 2px 2px;
+  border: none;
+}

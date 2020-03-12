@@ -1,0 +1,21 @@
+Web user
+0 * * * * ~/private/mysqldump.sh >/dev/null 2>&1
+0 23 * * * ~/private/mysqldump.sh mail >/dev/null 2>&1
+0 5 * * * ~/httpdocs/scripts/database_maintenance.sh >> ~/private/database_maintenance.log 2>&1
+50 16 * * * ~/httpdocs/scripts/reminder.sh >> ~/private/reminder.log 2>&1
+50 06 * * * ~/httpdocs/scripts/astreintes_updates.sh >> ~/private/astreintes_updates.log 2>&1
+* * * * * ~/httpdocs/scripts/mailer.sh >> ~/private/mailer.log 2>&1
+0 8 * * * rm -f ~/sent
+
+
+Web user backup server
+20 * * * * ~/private/rsync.sh >> ~/private/rsync.log 2>&1
+00 10 * * * find ~/private -name '*hourly.sql.gz' -mtime +4 -exec rm -f '{}' \;
+02 10 * * * find ~/private -name '*nightly.sql.gz' -mtime +60 -exec rm -f '{}' \;
+
+Root
+@reboot /home/timeScript.sh > /dev/null 2>&1
+0       3,20    *       *       *       /home/check_raid.sh > /dev/null 2>&1
+55      *       *       *       *       /home/timeScript.sh > /dev/null 2>&1
+50      23      *       *       *       /usr/local/bin/pflogsumm.pl -u 10 -d today --problems_first /var/log/maillog | mail -s 'postfix log' nico.marche@free.fr
+0       5       *       *       *       /usr/sbin/postsuper -d ALL deferred >>  /var/log/purge_mailq.log 2>&1

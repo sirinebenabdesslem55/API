@@ -1,0 +1,83 @@
+﻿Plusieurs crashs systeme observés, avec le message suivant dans la console.
+
+arcmsr6: abort device command of scsi id = 0 lun = 0
+arcmsr: executing bus reset eh.....num_resets = 0, num_aborts = 1
+sd 6:0:0:0: [sda]  Result: hostbyte=DID_BAD_TARGET driverbyte=DRIVER_OK
+sd 6:0:0:0: [sda] CDB: Read(10): 28 00 18 7b 55 b1 00 00 08
+
+
+Système de sauvetage: Système de sauvetage 64 bits Linux (debian/stable)
+
+
+sudo e2fsck -c -c -p -v /dev/sda1
+
+rescue:~# e2fsck -c -c -p -v /dev/sda1
+
+[  675.875635] nf_conntrack: automatic helper assignment is deprecated and it will be removed soon. Use the iptables CT target to attach helpers instead.
+
+root: Updating bad block inode.
+
+       19068 inodes used (7.25%, out of 262944)
+          98 non-contiguous files (0.5%)
+           5 non-contiguous directories (0.0%)
+             # of inodes with ind/dind/tind blocks: 2859/11/0
+      266834 blocks used (25.41%, out of 1050241)
+           0 bad blocks
+           1 large file
+
+       14100 regular files
+        3628 directories
+         394 character device files
+         259 block device files
+           1 fifo
+          12 links
+         676 symbolic links (674 fast symbolic links)
+           1 socket
+------------
+       19071 files
+
+On started system
+	   
+[root@s16662562 ~]# badblocks -v /dev/sda1
+Checking blocks 0 to 4200965
+Checking for bad blocks (read-only test): done
+Pass completed, 0 bad blocks found.
+
+
+[root@s16662562 ~]# cat /proc/mdstat
+Personalities :
+unused devices: <none>
+
+
+[root@s16222666 ~]# grep smartd /var/log/messages
+Apr  1 13:21:20 s16111729 smartd[15251]: Device: /dev/sdb [SAT], 57 Currently unreadable (pending) sectors
+Apr  1 13:21:20 s16111729 smartd[15251]: Device: /dev/sdb [SAT], 57 Offline uncorrectable sectors
+
+
+[root@s16222666 ~]# smartctl -i /dev/sdb
+smartctl 5.43 2012-06-30 r3573 [x86_64-linux-2.6.32-504.12.2.el6.x86_64] (local build)
+Copyright (C) 2002-12 by Bruce Allen, http://smartmontools.sourceforge.net
+
+=== START OF INFORMATION SECTION ===
+Model Family:     Seagate Barracuda 7200.12
+Device Model:     ST31000524AS
+Serial Number:    9VPECYKK
+LU WWN Device Id: 5 000c50 03f155738
+Firmware Version: JC4B
+User Capacity:    1,000,204,886,016 bytes [1.00 TB]
+Sector Size:      512 bytes logical/physical
+Device is:        In smartctl database [for details use: -P show]
+ATA Version is:   8
+ATA Standard is:  ATA-8-ACS revision 4
+Local Time is:    Wed Apr  1 22:57:58 2015 CEST
+SMART support is: Available - device has SMART capability.
+SMART support is: Enabled
+
+[root@s16111729 ~]# smartctl -H /dev/sdb
+smartctl 5.43 2012-06-30 r3573 [x86_64-linux-2.6.32-504.12.2.el6.x86_64] (local build)
+Copyright (C) 2002-12 by Bruce Allen, http://smartmontools.sourceforge.net
+
+=== START OF READ SMART DATA SECTION ===
+SMART overall-health self-assessment test result: PASSED
+
+[root@s16222666 ~]# smartctl -a /dev/sdb

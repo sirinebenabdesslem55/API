@@ -1,0 +1,11 @@
+
+\.idea/
+
+node_modules
+
+
+user-data/save/
+
+conf/sql\.php
+
+images/user-specific/splash-test\.jpg
