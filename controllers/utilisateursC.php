@@ -31,9 +31,9 @@ class Utilisateurs
 
     static public function getOneUserByLogin(){
          //var_dump($_GET['P_CODE']);
-          var_dump($_GET['P_MDP']);
+          //var_dump($_GET['P_MDP']);
           $mcrypt = my_create_hash($_GET['P_MDP']);
-          var_dump($mcrypt);
+          //var_dump($mcrypt);
 
         if(isset($_GET['P_CODE']) && !empty($_GET['P_CODE']) && isset($_GET['P_MDP']) && !empty($_GET['P_MDP'])){
                 $employee = Utilisateur::getEmployeLogin($_GET['P_CODE']);
@@ -44,12 +44,18 @@ class Utilisateurs
                     return $c;
                 }
                 else{
-                    die(print_r("Mdp ou username incorrect"));
+
+                    return (1);
+                    //mot de passe ou nom utilisateur incorrect
+                    //die(print_r("Mdp ou username incorrect"));
                 }
         }
         
+        //formulaire mal remplit
         else{
-             die(print_r("Formulaire mal remplit"));
+
+            return (2);
+             //die(print_r("Formulaire à été mal remplit"));
         }
     }
 
@@ -66,7 +72,7 @@ class Utilisateurs
     }
     else
     {
-        die(print_r("erreru de remplissage de formulaire"));
+        die(print_r("erreur de remplissage de formulaire"));
     }
 
     }
