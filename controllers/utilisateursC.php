@@ -97,15 +97,71 @@ class Utilisateurs
   }
 
     }*/
-static public function update($aray)
 
-{
-        
+    static public function update()
+    {
+             $P_ID=$_POST['post']['P_ID'];
+             $P_NOM=$_POST['post']['P_NOM'];
+             $P_NOM_NAISSANCE=$_POST['post']['P_NOM_NAISSANCE' ];
+             $P_PRENOM=$_POST['post']['P_PRENOM'];
+             $P_PRENOM2=$_POST['post']['P_PRENOM2'];
+             $P_BIRTHDATE=$_POST['post']['P_BIRTHDATE'];
+             $P_BIRTHPLACE=$_POST['post']['P_BIRTHPLACE'];
+             $P_BIRTH_DEP=$_POST['post']['P_BIRTH_DEP'];
+             $P_SEXE=$_POST['post']['P_SEXE'];
+             $P_EMAIL=$_POST['post']['P_EMAIL'];
+             $P_PHONE=$_POST['post']['P_PHONE' ];
+             $P_PHONE2=$_POST['post']['P_PHONE2'];
+             $P_ADDRESS=$_POST['post']['P_ADDRESS'];
+             $P_CITY=$_POST['post']['P_CITY'];
+             $P_ZIP_CODE=$_POST['post']['P_ZIP_CODE'];
+             $P_PROFESSION=$_POST['post']['P_PROFESSION']; 
+             $P_GRADE=$_POST['post'][ 'P_GRADE'];
+             $P_STATUT=$_POST['post']['P_STATUT'];
+             $P_DATE_ENGAGEMENT=$_POST['post']['P_DATE_ENGAGEMENT'];
 
+
+             $data= array("P_ID"=>$P_ID,
+                          "P_NOM"=>$P_NOM,
+                          "P_NOM_NAISSANCE"=>$P_NOM_NAISSANCE,
+                          "P_PRENOM"=>$P_PRENOM,
+                          "P_PRENOM2"=>$P_PRENOM2,
+                          "P_BIRTHDATE"=>$P_BIRTHDATE,
+                          "P_BIRTHPLACE"=>$P_BIRTHPLACE,
+                          "P_BIRTH_DEP"=>$P_BIRTH_DEP,
+                          "P_SEXE"=>$P_SEXE,
+                          "P_EMAIL"=>$P_EMAIL,
+                          "P_PHONE"=>$P_PHONE,
+                          "P_PHONE2"=>$P_PHONE2,
+                          "P_ADDRESS"=>$P_ADDRESS,
+                          "P_CITY"=>$P_CITY,
+                          "P_ZIP_CODE"=>$P_ZIP_CODE,
+                          "P_PROFESSION"=>$P_PROFESSION,
+                          "P_GRADE"=>$P_GRADE,
+                          "P_STATUT"=>$P_STATUT,
+                          "P_DATE_ENGAGEMENT"=>$P_DATE_ENGAGEMENT
+    );
     
-
+    
+    
+    //die(var_dump($data));
+    $result =Utilisateur::up($data);
+    
+    if($result == 'ok')
+    {
+        
+    
+    header('Location: localhost/Interventions-Management/liste');
+    
+    
+    }    
+       
     }
-}
+    
+        
+        
+        }  
+    
 
 
 ?>
